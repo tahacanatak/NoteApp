@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -17,6 +18,8 @@ namespace NoteApp.API.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public virtual ICollection<Note> Notes { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -30,6 +33,9 @@ namespace NoteApp.API.Models
         {
             return new ApplicationDbContext();
         }
+
+
+
 
         public DbSet<Note> Notes { get; set; }
     }

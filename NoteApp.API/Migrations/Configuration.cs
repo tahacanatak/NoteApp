@@ -1,5 +1,8 @@
 namespace NoteApp.API.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using NoteApp.API.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,10 +17,38 @@ namespace NoteApp.API.Migrations
 
         protected override void Seed(NoteApp.API.Models.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            if (!context.Users.Any())
+            {
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+                var user = new ApplicationUser
+                {
+                    UserName = "tahacan.atak@gmail.com",
+                    Email = "tahacan.atak@gmail.com",
+                    EmailConfirmed = true
+                };
+
+                userManager.Create(user, "Ankara1.");
+
+                context.Notes.Add(new Note
+                {
+                    AuthorId = user.Id,
+                    Title = "Sample Note 1",
+                    Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit rhoncus ipsum. Duis ac velit arcu. Maecenas velit eros, aliquam id turpis sit amet, posuere ...",
+                    CreatedTime = DateTime.Now
+                });
+
+                context.Notes.Add(new Note
+                {
+                    AuthorId = user.Id,
+                    Title = "Sample Note 2",
+                    Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit rhoncus ipsum. Duis ac velit arcu. Maecenas velit eros, aliquam id turpis sit amet, posuere ...",
+                    CreatedTime = DateTime.Now.AddMinutes(10)
+                });
+
+            }
+
         }
     }
 }
