@@ -78,10 +78,20 @@ namespace NoteApp.API.Controllers
             {
                 return BadRequest();
             }
+            var note = db.Notes.Find(id);
+
+            if (note == null)
+            {
+                return NotFound();
+            }
+
+            if (note.AuthorId != User.Identity.GetUserId())
+            {
+                return Unauthorized();
+            }
 
             if (ModelState.IsValid)
             {
-                var note = db.Notes.Find(id);
                 note.Title = dto.Title;
                 note.Content = dto.Content;
                 note.ModifiedTime = DateTime.Now;
@@ -92,7 +102,30 @@ namespace NoteApp.API.Controllers
             }
 
             return BadRequest(ModelState);
+        }
 
+
+
+
+        public IHttpActionResult DeleteNote(int id)
+        {
+
+            var note = db.Notes.Find(id);
+
+            if (note == null)
+            {
+                return NotFound();
+            }
+
+            if (note.AuthorId != User.Identity.GetUserId())
+            {
+                return Unauthorized();
+            }
+
+            db.Notes.Remove(note);
+            db.SaveChanges();
+
+            return Ok(note.ToGetNoteDto());
         }
     }
 }
