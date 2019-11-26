@@ -1,0 +1,3 @@
+install-package angularjs
+install-package bootstrap
+install-package font.awesome

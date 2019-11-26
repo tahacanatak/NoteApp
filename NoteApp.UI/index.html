@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/fontawesome-all.min.css" rel="stylesheet" />
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-route.min.js"></script>
+</head>
+<!--Angular Routing
+https://www.w3schools.com/angular/angular_routing.asp-->
+
+<body ng-app="myApp">
+
+    <a href="#!/">Anasayfa</a>
+    <a href="#!login">Giriş</a>
+    <a href="#!register">Kayıt Ol</a>
+
+    <hr />
+
+    <div ng-view></div>
+
+
+
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        var app = angular.module("myApp", ["ngRoute"]);
+
+        app.config(function ($routeProvider) {
+            $routeProvider
+                .when("/", {
+                    templateUrl: "Pages/Main.html",
+                    controller: "mainCtrl"
+                })
+                .when("/login", {
+                    templateUrl: "Pages/Login.html",
+                    controller: "loginCtrl"
+                })
+                .when("/register", {
+                    templateUrl: "Pages/Register.html",
+                    controller: "registerCtrl"
+                })
+        });
+
+        app.controller("mainCtrl", function ($scope) {
+            $scope.message = "Anasayfadasınız."
+        });
+        app.controller("loginCtrl", function ($scope) {
+            $scope.message = "Giriş yap."
+        });
+        app.controller("registerCtrl", function ($scope) {
+            $scope.message = "Kayıt ol."
+        });
+    </script>
+</body>
+</html>
