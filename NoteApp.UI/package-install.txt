@@ -1,3 +1,6 @@
 install-package angularjs
 install-package bootstrap
 install-package font.awesome
+
+Apý solutiona owin cors paketi kuruldu api izinleri için
+apý solutiona identity.core.tr paketi kuruldu. hatalarý trye cevirmek için

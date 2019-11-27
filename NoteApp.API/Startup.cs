@@ -12,6 +12,8 @@ namespace NoteApp.API
     {
         public void Configuration(IAppBuilder app)
         {
+            //API izinleri için owin cors kurduktan sonra
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             ConfigureAuth(app);
         }
     }

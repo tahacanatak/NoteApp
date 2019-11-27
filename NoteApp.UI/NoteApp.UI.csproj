@@ -90,6 +90,7 @@
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="index.html" />
+    <Content Include="index.js" />
     <Content Include="package-install.txt" />
     <Content Include="Pages\Login.html" />
     <Content Include="Pages\Register.html" />
