@@ -8,6 +8,18 @@
 
                     <p class="h4 mb-4">Giriş Yap</p>
 
+                    <div class="alert alert-danger text-left" ng-show="hasErrors()">
+                        <ul class="mb-0">
+                            <li ng-repeat="error in errors">
+                                {{ error }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-success text-left" ng-show="successMessage">
+                        {{successMessage}}
+                    </div>
+
                     <!-- Email  ng-modellerin adını postmande kullandigimiz keylere göre verdik-->
                     <input ng-model="user.username" type="email" id="Email" name="Email" class="form-control mb-4" placeholder="Mail Adresi">
 
@@ -44,5 +56,5 @@
     </div>
 </div>
 
-{{user}}
-{{isRememberMe}}
+<!--{{user}}
+{{isRememberMe}}-->
