@@ -14,8 +14,8 @@
                 <div class="list-group mt-4">
                     <h5 class="list-group-item list-group-item text-light bg-secondary">Yazılarım</h5>
 
-                    <a href="#" class="list-group-item list-group-item-action list-group-item-light bg-light" 
-                       ng-repeat="note in notes">
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light bg-light text-secondary" 
+                       ng-repeat="note in notes" ng-click="showNote($event, note)" ng-class="noteActiveClass(note.Id)">
                         {{note.Title}}
                     </a>
 
@@ -25,16 +25,15 @@
                 <div class="card mt-4">
                     <div class="card-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Başlık"/>
+                            <input ng-model="activeNote.Title" type="text" class="form-control" placeholder="Başlık"/>
                         </div>
                         <div class="form-group">
-                            <textarea type="text" class="form-control" rows="10" placeholder="Bir şeyler yazın.."></textarea>              
+                            <textarea ng-model="activeNote.Content" type="text" class="form-control" rows="10" placeholder="Bir şeyler yazın.."></textarea>              
                         </div>
+                        <button type="button" class="btn btn-xs btn-secondary" ng-click="saveNote($event)">Kaydet</button>
+                        <button type="button" class="btn btn-xs btn-danger" ng-click="deleteNote($event)">Sil</button>
                     </div>
-                    <div class="card-footer bg-white">
-                        <button type="button" class="btn btn-xs btn-secondary">Kaydet</button>
-                        <button type="button" class="btn btn-xs btn-danger">Sil</button>
-                    </div>
+                   
                 </div>
             </div>
         </div>

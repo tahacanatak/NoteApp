@@ -96,7 +96,13 @@ app.controller("mainCtrl", function ($scope, $http, $window, $location) {
         return;
     }
 
-   
+    $scope.selectedNote = null; // kisinin dizideki notu
+    $scope.activeNote = {
+        Id: 0,
+        Title: "",
+        Content: ""
+    };
+
     $scope.isLoading = true;
     $scope.notes = []; // notlar bu dizide tutulacak
 
@@ -114,6 +120,43 @@ app.controller("mainCtrl", function ($scope, $http, $window, $location) {
             }
         );
     };
+
+    $scope.showNote = function (e, note) {
+        e.preventDefault();
+        $scope.activeNote = angular.copy(note); //active note viewmodel gibi veriyi taşıyor.Başlıklar aynı anda degismesin diye
+        $scope.selectedNote = note; // selected nota veritabanindan gelen hakiki notu tasıdık
+    };
+
+    $scope.saveNote = function (e) {
+        e.preventDefault();
+        if ($scope.activeNote.Id !== 0) {
+            $http.put(apiUrl + "api/Notes/PutNote/" + $scope.activeNote.Id, $scope.activeNote,
+                $scope.requestConfig()).then(
+                    function (response) {
+                        //console.log(response.data);
+                        $scope.selectedNote.Title = response.data.Title;
+                        $scope.selectedNote.Content = response.data.Title;
+                        $scope.selectedNote.ModifiedTime = response.data.ModifiedTime;                       
+                    },
+                    function (response) {
+
+                    }
+                );
+
+        }
+    };
+
+    $scope.deleteNote = function (e) {
+
+    };
+
+
+    $scope.noteActiveClass = function (id) {
+        if ($scope.selectedNote == null) {
+            return "";
+        }
+        return $scope.selectedNote.Id == id ? "active" : "";
+    }
 
     $scope.loadNotes();
 
