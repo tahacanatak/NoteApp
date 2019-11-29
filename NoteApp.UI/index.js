@@ -2,7 +2,7 @@
 
 var app = angular.module("myApp", ["ngRoute"]);
 
-app.controller("indexCtrl", function ($scope, $window, $http) {
+app.controller("indexCtrl", function ($scope, $window, $http, $location) {
 
     $scope.isAuthenticated = false;
 
@@ -56,6 +56,21 @@ app.controller("indexCtrl", function ($scope, $window, $http) {
         }
     };
 
+    $scope.logout = function (e) {
+        e.preventDefault();
+
+        $scope.setLoggedInUser(null);
+        $http.post(apiUrl + "api/Account/Logout", null, $scope.requestConfig()).then(
+            function (response) {
+
+            }
+        );
+
+        $window.sessionStorage.removeItem("token");
+        $window.localStorage.removeItem("token");
+        $location.path("login");
+    };
+
     $scope.checkAuthentication();
 });
 
@@ -76,17 +91,32 @@ app.config(function ($routeProvider) {
 });
 
 app.controller("mainCtrl", function ($scope, $http, $window, $location) {
+    if (!$scope.token()) { // == null
+        $location.path("login");
+        return;
+    }
 
+   
+    $scope.isLoading = true;
     $scope.notes = []; // notlar bu dizide tutulacak
 
 
     $scope.loadNotes = function () {
         $http.get(apiUrl + "api/Notes/GetNotes", $scope.requestConfig()).then(
             function (response) {
-                console.log(response.data);
+                $scope.notes = response.data;
+                $scope.isLoading = false;
+            },
+            function (response) {
+                if (response.status == 401) {
+                    $location.path("login");
+                }
             }
         );
     };
+
+    $scope.loadNotes();
+
 
 });
 

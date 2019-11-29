@@ -1,48 +1,51 @@
 ﻿<!--https://mdbootstrap.com/docs/jquery/forms/basic/?#!-->
-<div class="row">
-    <div class="col-md-8 col-lg-6 mx-auto mt-md-5 mt-sm-2">
-        <div class="card">
-            <div class="card-body">
-                <!-- Default form login -->
-                <form name="frmRegister" class="text-center border border-light p-5" action="#!" ng-submit="register($event)">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8  col-md-6 mx-auto mt-md-5 mt-sm-2">
+            <div class="card border-secondary">
+                <h4 class="card-header bg-secondary text-white text-center text-uppercase py-4">Kayıt ol</h4>
 
-                    <p class="h4 mb-4">Kayıt Ol</p>
+                <div class="card-body pt-0">
+                    <!-- Default form login -->
+                    <form name="frmRegister" class="text-center border border-light p-5" action="#!" ng-submit="register($event)">
 
-                    <div class="alert alert-danger text-left" ng-show="hasErrors()">
-                        <ul class="mb-0">
-                            <li ng-repeat="error in errors">
-                                {{ error }}
-                            </li>
-                        </ul>
-                    </div>
 
-                    <div class="alert alert-success text-left" ng-show="successMessage">
-                        {{successMessage}}
-                    </div>
+                        <div class="alert alert-danger text-left" ng-show="hasErrors()">
+                            <ul class="mb-0">
+                                <li ng-repeat="error in errors">
+                                    {{ error }}
+                                </li>
+                            </ul>
+                        </div>
 
-                    <!-- Email -->
-                    <input ng-model="user.Email" type="email" id="Email" name="Email" class="form-control mb-4" placeholder="Mail adresi" required />
+                        <div class="alert alert-success text-left" ng-show="successMessage">
+                            {{successMessage}}
+                        </div>
 
-                    <!-- Password -->
-                    <input ng-model="user.Password" type="password" id="Password" name="Password" class="form-control mb-4" placeholder="Parola" required />
+                        <!-- Email -->
+                        <input ng-model="user.Email" type="email" id="Email" name="Email" class="form-control mb-4" placeholder="Mail adresi" required />
 
-                    <!-- Confirm Password -->
-                    <input ng-model="user.ConfirmPassword" type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control mb-4" placeholder="Parola (Tekrar)" required />
+                        <!-- Password -->
+                        <input ng-model="user.Password" type="password" id="Password" name="Password" class="form-control mb-4" placeholder="Parola" required />
 
-                    <!-- register button -->
-                    <button class="btn btn-info btn-block my-4" type="submit">Kayıt Ol</button>
+                        <!-- Confirm Password -->
+                        <input ng-model="user.ConfirmPassword" type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control mb-4" placeholder="Parola (Tekrar)" required />
 
-                    <!-- Register -->
-                    <p>
-                        Zaten üye misiniz?
-                        <a href="#!login">Giriş Yap</a>
-                    </p>
+                        <!-- register button -->
+                        <button class="btn btn-warning btn-block my-4" type="submit">Kayıt Ol</button>
 
-                </form>
-                <!-- Default form login -->
+                        <!-- Register -->
+                        <p>
+                            Zaten üye misiniz?
+                            <a href="#!login">Giriş Yap</a>
+                        </p>
+
+                    </form>
+                    <!-- Default form login -->
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+</div>
 <!--{{user}}-->
