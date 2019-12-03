@@ -33,8 +33,8 @@
                         <div class="form-group">
                             <textarea ng-model="activeNote.Content" type="text" class="form-control" rows="10" placeholder="Bir şeyler yazın.."></textarea>              
                         </div>
-                        <button type="button" class="btn btn-xs btn-secondary" ng-click="saveNote($event)">Kaydet</button>
-                        <button type="button" class="btn btn-xs btn-danger" ng-click="deleteNote($event)">Sil</button>
+                        <button type="button" class="btn btn-xs btn-secondary" ng-disabled="!activeNote.Title" ng-click="saveNote($event)">Kaydet</button>
+                        <button type="button" class="btn btn-xs btn-danger" ng-disabled="!selectedNote" ng-click="deleteNote($event)">Sil</button>
                     </div>
                    
                 </div>

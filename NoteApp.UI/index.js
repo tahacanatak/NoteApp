@@ -123,7 +123,9 @@ app.controller("mainCtrl", function ($scope, $http, $window, $location) {
     };
 
     $scope.newNote = function (e) {
-        e.preventDefault();
+        if (e)
+            e.preventDefault();
+
         $scope.selectedNote = null;
 
         $scope.activeNote = {
@@ -162,7 +164,7 @@ app.controller("mainCtrl", function ($scope, $http, $window, $location) {
                 .then(
                     function (response) {
                         $scope.notes.push(response.data);
-                        $scope.showNote(null,response.data);
+                        $scope.showNote(null, response.data);
                     },
                     function (response) {
 
@@ -172,18 +174,31 @@ app.controller("mainCtrl", function ($scope, $http, $window, $location) {
     };
 
     $scope.deleteNote = function (e) {
+        e.preventDefault();
 
+        if ($scope.selectedNote) {
+            $http.delete(apiUrl + "api/Notes/DeleteNote/" + $scope.selectedNote.Id, $scope.requestConfig())
+                .then(
+                    function (response) {
+                        var i = $scope.notes.indexOf($scope.selectedNote);
+                        $scope.notes.splice(i, 1);
+                        $scope.newNote();
+                    },
+                    function (response) {
+
+                    },
+                );
+        }
     };
 
-
-    $scope.noteActiveClass = function (id) {
-        if ($scope.selectedNote == null) {
-            return "";
-        }
-        return $scope.selectedNote.Id == id ? "active" : "";
+$scope.noteActiveClass = function (id) {
+    if ($scope.selectedNote == null) {
+        return "";
     }
+    return $scope.selectedNote.Id == id ? "active" : "";
+}
 
-    $scope.loadNotes();
+$scope.loadNotes();
 
 
 });
