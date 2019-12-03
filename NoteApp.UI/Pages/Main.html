@@ -6,10 +6,10 @@
 
 
 
-<div ng-show="!isLoading">
+<div ng-show="!isLoading" class="h-100">
 
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid h-100">
+        <div class="row h-100">
             <div class="col-md-3">
                 <div class="list-group mt-4">
                     <div class="list-group-item list-group-item text-light bg-secondary d-flex align-items-end">
@@ -24,17 +24,19 @@
 
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="card mt-4">
-                    <div class="card-body">
+            <div class="col-md-9 pt-4 py-3 pr-2 h-100">
+                <div class="card h-100">
+                    <div class="card-body h-100 d-flex flex-column">
                         <div class="form-group">
                             <input ng-model="activeNote.Title" type="text" class="form-control" placeholder="Başlık"/>
                         </div>
-                        <div class="form-group">
-                            <textarea ng-model="activeNote.Content" type="text" class="form-control" rows="10" placeholder="Bir şeyler yazın.."></textarea>              
+                        <div class="form-group flex-grow-1">
+                            <textarea ng-model="activeNote.Content" type="text" class="form-control h-100"  placeholder="Bir şeyler yazın.."></textarea>              
                         </div>
-                        <button type="button" class="btn btn-xs btn-secondary" ng-disabled="!activeNote.Title" ng-click="saveNote($event)">Kaydet</button>
-                        <button type="button" class="btn btn-xs btn-danger" ng-disabled="!selectedNote" ng-click="deleteNote($event)">Sil</button>
+                        <div>
+                            <button type="button" class="btn btn-xs btn-secondary" ng-disabled="!activeNote.Title" ng-click="saveNote($event)">Kaydet</button>
+                            <button type="button" class="btn btn-xs btn-danger" ng-disabled="!selectedNote" ng-click="deleteNote($event)">Sil</button>
+                        </div>
                     </div>
                    
                 </div>
