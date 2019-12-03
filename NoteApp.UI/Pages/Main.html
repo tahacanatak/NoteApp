@@ -10,9 +10,12 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="list-group mt-4">
-                    <h5 class="list-group-item list-group-item text-light bg-secondary">Yazılarım</h5>
+                    <div class="list-group-item list-group-item text-light bg-secondary d-flex align-items-end">
+                        <h5>Yazılarım</h5>
+                        <a ng-click="newNote($event)" href="#" class="btn btn-xs btn-success ml-auto"><i class="fas fa-plus"></i></a>
+                    </div>
 
                     <a href="#" class="list-group-item list-group-item-action list-group-item-light bg-light text-secondary" 
                        ng-repeat="note in notes" ng-click="showNote($event, note)" ng-class="noteActiveClass(note.Id)">
@@ -21,7 +24,7 @@
 
                 </div>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <div class="card mt-4">
                     <div class="card-body">
                         <div class="form-group">

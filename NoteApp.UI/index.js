@@ -90,6 +90,7 @@ app.config(function ($routeProvider) {
         })
 });
 
+/////////////////////////////////// MAIN CONTROLLER \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 app.controller("mainCtrl", function ($scope, $http, $window, $location) {
     if (!$scope.token()) { // == null
         $location.path("login");
@@ -121,8 +122,21 @@ app.controller("mainCtrl", function ($scope, $http, $window, $location) {
         );
     };
 
-    $scope.showNote = function (e, note) {
+    $scope.newNote = function (e) {
         e.preventDefault();
+        $scope.selectedNote = null;
+
+        $scope.activeNote = {
+            Id: 0,
+            Title: "",
+            Content: ""
+        };
+    }
+
+    $scope.showNote = function (e, note) {
+        if (e)
+            e.preventDefault();
+
         $scope.activeNote = angular.copy(note); //active note viewmodel gibi veriyi taşıyor.Başlıklar aynı anda degismesin diye
         $scope.selectedNote = note; // selected nota veritabanindan gelen hakiki notu tasıdık
     };
@@ -135,14 +149,25 @@ app.controller("mainCtrl", function ($scope, $http, $window, $location) {
                     function (response) {
                         //console.log(response.data);
                         $scope.selectedNote.Title = response.data.Title;
-                        $scope.selectedNote.Content = response.data.Title;
-                        $scope.selectedNote.ModifiedTime = response.data.ModifiedTime;                       
+                        $scope.selectedNote.Content = response.data.Content;
+                        $scope.selectedNote.ModifiedTime = response.data.ModifiedTime;
                     },
                     function (response) {
 
                     }
                 );
 
+        } else { //yeni not ekle
+            $http.post(apiUrl + "api/Notes/PostNote", $scope.activeNote, $scope.requestConfig())
+                .then(
+                    function (response) {
+                        $scope.notes.push(response.data);
+                        $scope.showNote(null,response.data);
+                    },
+                    function (response) {
+
+                    }
+                );
         }
     };
 
@@ -163,6 +188,7 @@ app.controller("mainCtrl", function ($scope, $http, $window, $location) {
 
 });
 
+/////////////////////////////////// LOGIN CONTROLLER \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 app.controller("loginCtrl", function ($scope, $http, $httpParamSerializer, $window, $location, $timeout) {
     $scope.errors = [];
@@ -228,6 +254,7 @@ app.controller("loginCtrl", function ($scope, $http, $httpParamSerializer, $wind
 
 });
 
+/////////////////////////////////// REGISTER CONTROLLER \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 app.controller("registerCtrl", function ($scope, $http) {
     $scope.errors = [];
