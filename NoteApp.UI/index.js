@@ -213,8 +213,8 @@ app.controller("loginCtrl", function ($scope, $http, $httpParamSerializer, $wind
     //default user bilgileri
     $scope.user = {
         grant_type: "password",
-        username: "tahacan.atak@gmail.com",
-        password: "Ankara1."
+        username: "",
+        password: ""
     };
     //beni hatirla btnu default 
     $scope.isRememberMe = false;
@@ -276,9 +276,9 @@ app.controller("registerCtrl", function ($scope, $http) {
     $scope.message = "";
 
     $scope.user = {
-        Email: "tahacan.atak@gmail.com",
-        Password: "Ankara1.",
-        ConfirmPassword: "Ankara1."
+        Email: "",
+        Password: "",
+        ConfirmPassword: ""
     };
 
     $scope.register = function (e) {
